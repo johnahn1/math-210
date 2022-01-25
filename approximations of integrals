@@ -1,0 +1,108 @@
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+import numpy as np
+
+#function
+def f4(x):
+  return x**4 - 16*x**3 + 96*x**2 - 264*x +300
+  # actual integral: 135
+  
+# approximation from 1 to 6 using 10 rectangles 
+n = 10
+deltax = (6-1)/n
+rects = 0
+
+left = np.arange(1,6, deltax )
+
+for i in range(len(left)):
+  rects = rects + f4(left[i])*deltax
+
+print(rects)
+
+
+#Define a function df(x) which returns the derivative  f′(x)  at x
+x=np.arange(0,10,0.1)
+
+def f(x):
+  return x**4 - 16*x**3 + 96*x**2 - 264*x +300
+  # actual integral: 135
+def derf(x):
+  return 4*x**3 - 48*x**2 + 192*x - 264
+  
+#Graph f(x) and f'(x)
+# plotting the graph
+plt.plot(x, f(x))
+plt.plot(x, derf(x))
+plt.ylim((-100,100))
+plt.grid()
+plt.show()
+
+#Use S to compute the theoretical error bound of the  L10  approximation.
+S = derf(1)
+print(S)
+
+n = 10
+
+def error(n):
+  error = -1/2 * S * (6-1)**2 /n 
+  return error
+
+error(n) 
+
+## Compute L100  and  L1000  approximations between x= 1 and x= 6
+#compute for L100
+n = 100
+deltax = (6-1)/n
+
+left = np.arange(1,6, deltax )
+
+rects = 0
+
+for i in range(len(left)):
+  rects = rects + f4(left[i])*deltax
+print(rects)
+
+#compute for L1000
+n = 1000
+deltax = (6-1)/n
+
+left = np.arange(1,6, deltax)
+
+rects = 0
+
+for i in range(len(left)):
+  rects = rects + f4(left[i])*deltax
+print(rects)
+
+#percentages of errors 
+print(29.16/145 * 100)
+print(2.654/14.5 *100)
+print(0.263/1.45 * 100)
+
+
+#Use the pacthes.rectangle() method and a for loop to add each of the rectangles from the  L10  approximation to a graph of  y=f(x)
+#arange for the graph 
+x=np.arange(0,10,0.1)
+
+#compute for L10
+n = 10
+deltax = (6-1)/n
+def f(x):
+  return x**4 - 16*x**3 + 96*x**2 - 264*x +300
+
+#draws the graph
+plt.plot(x, f(x))
+
+#x and y axis 
+ax=plt.axes()
+xax = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5]
+yax = [f(1), f(1.5), f(2), f(2.5), f(3), f(3.5), f(4), f(4.5), f(5), f(5.5)]
+
+for i in range(len(yax)):
+  rect = patches.Rectangle((xax[i],0), 0.5 , yax[i], color = 'orange')
+  ax.add_patch(rect)
+
+plt.xlim([0, 10])  # declare the horizontal size of the plot
+plt.ylim([0, 150])  # declare the vertical size of the plot
+
+
