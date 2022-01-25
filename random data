@@ -1,0 +1,59 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+
+#function
+def pdf4(x):
+  return np.where((x > 0) & (x < 1) , 1/x**0.5/(1-x)**(0.5)/3.1415926,0)
+# pdf4 is the pdf of the beta(0.5,0.5) random variable
+# create a size n sample of beta(0.5,0.5) with
+# np.random.beta(0.5,0.5,n)
+
+
+# Make a graph that shows a properly sized and binned histogram of a sample from the random variable lines 
+x= np.arange(0,1,0.01)
+sample = np.random.beta(0.5,0.5,1000)
+y = 1/x**0.5/(1-x)**(0.5)/3.1415926
+
+ax = plt.axes()
+ax.plot(x, y*10)
+ax.hist(sample, bins = 100)
+ax.set_title("Beta Random Variable with a sample size of 1000")
+plt.show()
+
+
+#### create averages of samples from your random variable instead of a normal random variable.
+def sampleaverage(samples=1,size=1): 
+  averages=np.array([]) 
+  for i in range(size): 
+    sample=np.random.beta(0.5,0.5,size=samples) #np.random.beta
+    x=np.average(sample) 
+    averages=np.append(averages,x) 
+  return averages
+
+# make an array of 10000 averages of samples of your random variable with sample size 1000
+
+ax = plt.axes()
+average1 = sampleaverage(samples= 10000, size =1000)
+ax.hist(average1, bins = 10)
+ax.set_title("10,000 Averages of Beta Random Variable with a sample size of 1000")
+
+plt.show()
+
+
+# Make a histogram showing how last random variable matches up to a normal PDF using norm.pdf()
+ax = plt.axes()
+ax.hist(average1, bins = 50)
+ax.set_title("Histogram of the Beta Ramdom Variable with the sample size of 1000")
+
+x=np.arange(0.45,0.55,0.001)
+mu=0.5
+sigma=0.004
+y=norm.pdf(x,mu,sigma)
+
+ax.plot(x,y*6)
+ax.grid()
+plt.show
+
+
+
