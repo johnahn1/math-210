@@ -1,0 +1,73 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+#function 
+def f4(x):
+  return x**3 - 5*x**2 + 10*x - 6.5
+  
+# linearization of f4(x) at a = 2
+# f(x) = x^3 - 5x^2 +10x - 6.5
+# f'(x) = 3x^2 - 10x + 10
+# L(x) = f(a) + f'(a)*(x-a), a = 2
+# L(x) = f(2) + f'(2)*(x-2)
+# f(2) = 1.5
+# f'(2) = 2
+# L(x) = 1.5 + 2(x-2)
+# L(x) = 2x - 2.5
+
+# x values near 2 
+x=np.arange(0,4,0.1)
+
+# defining the graph of linearization
+def L(x):
+  return 2*x-2.5
+
+# defining the original graph
+def f(x):
+  return x**3 - 5*x**2 + 10*x - 6.5
+
+# plotting the graph
+plt.plot(x, f(x))
+plt.plot(x, L(x))
+plt.ylim((0,4))
+plt.grid()
+plt.show()
+
+# solution = 1.25
+
+# The first idea of Newton's method is that the  x -intercept of the linearization at  a  is usually a better approximation of the root than  a  is.
+# f'(x) = 3x^2 - 10x + 10
+# L(x) = f(a) + f'(a)*(x-a)
+# L(x) = -2a^3 + 5a^2 - 6.5 + x(3a^2 - 10a + 10) = 0
+# x(3a^2 - 10a + 10) = 2a^3 - 5a^2 + 6.5
+# x = (2a^3 - 5a^2 + 6.5)/(3a^2 - 10a + 10)
+
+
+# defining the function new(a)
+def new(a):
+  x = (2*(a)**3-5*(a)**2+6.5)/(3*(a)**2-10*(a)+10)
+  return x
+
+# Testing the definition by inputting new(2)
+new(2)
+
+#Adding a line to the function new(a) to print the value of x before it returns x
+def new(a):
+  x = (2*(a)**3-5*(a)**2+6.5)/(3*(a)**2-10*(a)+10)
+  print(x)
+  return x
+
+#Applying function 10 times 
+new(new(new(new(new(new(new(new(new(new(2))))))))))
+
+#Assigning the actual value of the root of my function 
+r = 1.1880184060737011
+
+#Modifying my new funciton to print the difference between x and the atual value
+def new(a):
+  x = (2*(a)**3-5*(a)**2+6.5)/(3*(a)**2-10*(a)+10)
+  print(x-r)
+  return x
+
+#Applying the new function 10 times 
+new(new(new(new(new(new(new(new(new(new(2))))))))))
