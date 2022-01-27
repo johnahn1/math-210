@@ -1,0 +1,30 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+#function
+k=0.5
+def f4(x):
+  return k*x*(1-x)**2
+  
+  
+# graph the first 100 terms of the recursive sequence defined by your function
+def equilibrium(f, a, n):
+  sequence = [a]
+  for i in range(n):
+    a = f(a)
+    sequence.append(a)
+  x = np.arange(0,1,0.001)
+  y = f(x)
+  #plots
+  fig, axs = plt.subplots(1,2, figsize=(10,5))
+  #first subplot
+  axs[0].grid()
+  axs[0].plot(x,y)
+  axs[0].plot(x,x)
+  #second subplot
+  axs[1].grid()
+  axs[1].plot(sequence,'o')
+  plt.show()
+  return sequence[-1]
+  
+ 
