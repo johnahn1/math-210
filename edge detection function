@@ -1,0 +1,50 @@
+import numpy as np
+import urllib.request as request
+import matplotlib.pyplot as plt
+import csv
+import codecs
+import sympy
+
+#load images
+balloonfile=request.urlopen('https://math.emory.edu/~mpcarr/math210/labs/img/balloon.png')
+balloon=mpimg.imread(balloonfile)
+monafile=request.urlopen('https://math.emory.edu/~mpcarr/math210/labs/img/mona.png')
+mona=mpimg.imread(monafile)
+arialfile=request.urlopen('https://math.emory.edu/~mpcarr/math210/labs/img/arial.png')
+arial=mpimg.imread(arialfile)
+detailfile=request.urlopen('https://math.emory.edu/~mpcarr/math210/labs/img/detail.png')
+detail=mpimg.imread(detailfile)
+factoryfile=request.urlopen('https://math.emory.edu/~mpcarr/math210/labs/img/factory.png')
+factory=mpimg.imread(factoryfile)
+
+# display the picture with gray tone
+imgplot = plt.imshow(detail, cmap='gray')
+
+imgplot = plt.imshow(detail*800, cmap='gray')
+
+# Produce a plot of your image with x^2 applied to it.
+imgplot = plt.imshow(detail**2, cmap='gray')
+
+# Produce a plot of your image with x^0.5 applied to it
+imgplot = plt.imshow(detail**0.5, cmap='gray')
+
+#####Edge detection function
+def edges(xy):
+  dfdy = np.roll(xy,1,axis=0) -xy
+  dfdx = xy - np.roll(xy,1,axis=1)
+  return (dfdy**2 + dfdx**2)**0.5
+
+edges = edges(detail)
+imgplot = plt.imshow((edges), cmap='gray')
+
+#apply edges function
+def edges(xy):
+  dfdy = np.roll(xy,1,axis=0) -xy
+  dfdx = xy - np.roll(xy,1,axis=1)
+  return (dfdy**2 + dfdx**2)**0.5
+
+edges = edges(detail)
+imgplot = plt.imshow((edges), cmap='gray')
+
+#make the edge detection using brightness more clear 
+imgplot = plt.imshow((edges)**0.4, cmap='gray')
