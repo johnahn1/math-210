@@ -1,0 +1,70 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+#function
+def f4(x,y):
+  return np.cos(y)+np.sin(x+3*y)
+ 
+#Produce a colormapped diagram of the function on the domain −6≤x≤6  and  −4≤y≤
+
+# define the x,y values we want to use, with a fine mesh
+xvalues=np.arange(-6,6,0.1)
+yvalues=np.arange(-4,4,0.1)
+x,y=np.meshgrid(xvalues,yvalues)
+
+def f4(x,y):
+  return np.cos(y)+np.sin(x+3*y)
+
+z = f4(x,y)
+
+ax=plt.axes(xlim=[-6,6], ylim=[-4,4])
+ax.set_title('z= f4(x,y)')
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.imshow(z, extent=(-6,6,-4,4),cmap='coolwarm')
+
+
+#Produce a visualization of a gradient ascent
+def df(x,y):
+  fx = np.cos(x + 3*y)
+  fy = -np.sin(y)+np.cos(x+3*y)*3
+  return (fx,fy)
+
+def ascent(x,y,dg,alpha,n):
+  for i in range(n):
+    ax.quiver(x,y, alpha*dg(x,y)[0], alpha*dg(x,y)[1],angles='xy',scale_units='xy', scale=1)
+    x, y = x + alpha*dg(x,y)[0], y + alpha*dg(x,y)[1]
+  return (x, y)
+  
+def f4(x,y):
+  return np.cos(y)+np.sin(x+3*y)
+
+alpha = 0.1
+n = 300
+
+ax=plt.axes(xlim=[-6,6], ylim=[-4,4])
+ax.set_title('z= f4(x,y)')
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ascent(0,0,df,alpha,n)
+ax.imshow(z, cmap = 'coolwarm', origin = 'lower', extent=(-6,6,-4,4))
+
+#modify gradient ascent to find a local minimum instead
+def descent(x,y,dg,alpha,n):
+  for i in range(n):
+    ax.quiver(x,y, -alpha*dg(x,y)[0], -alpha*dg(x,y)[1],angles='xy',scale_units='xy', scale=1)
+    x,y = x - alpha*dg(x,y)[0] , y - alpha*dg(x,y)[1]
+  return (x, y)
+
+def f4(x,y):
+  return np.cos(y)+np.sin(x+3*y)
+
+alpha = 0.1
+n = 300
+
+ax=plt.axes(xlim=[-6,6], ylim=[-4,4])
+ax.set_title('z= f4(x,y)')
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+descent(3,1,df,alpha,n)
+ax.imshow(z, cmap = 'coolwarm', origin = 'lower', extent=(-6,6,-4,4))
